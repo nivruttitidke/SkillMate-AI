@@ -14,6 +14,7 @@ import UserDashboard from "./components/UserDashboard";
 import HistoryPage from "./components/HistoryPage";
 import ProfilePage from "./components/ProfilePage";
 import { Toaster } from "react-hot-toast";
+import ChangePassword from "./components/ChangePassword";
 
 // Protect private routes
 function ProtectedRoute({ children }) {
@@ -114,6 +115,15 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+           path="/change-password"
+             element={
+              <ProtectedRoute>
+                <ChangePassword />
+                 </ProtectedRoute>
+              }
+       />
+
 
         {/* DEFAULT REDIRECT */}
         <Route path="/" element={<Navigate to="/login" replace />} />
