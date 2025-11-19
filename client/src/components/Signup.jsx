@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-
+import api from "../api";
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ export default function Signup() {
 
   const signup = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await api.post("/api/auth/register", {
         name,
         email,
         password,

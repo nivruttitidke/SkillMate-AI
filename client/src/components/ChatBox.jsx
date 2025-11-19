@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import api from "../api";
 export default function ChatBox() {
   const navigate = useNavigate();
   const practice = JSON.parse(localStorage.getItem("practice"));
@@ -191,7 +190,7 @@ export default function ChatBox() {
     );
 
     try {
-      await axios.post(
+      await api.post(
         "/api/user/history",
         { category: practice.category, score },
         {
@@ -203,7 +202,7 @@ export default function ChatBox() {
     } catch {}
 
     try {
-      const res = await axios.post("/api/chat/upgrade-answers", {
+      const res = await api.post("/api/chat/upgrade-answers", {
         questions: practice.questions,
         answers: answersRef.current,
         language,

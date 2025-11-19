@@ -1,9 +1,8 @@
 // client/src/components/HistoryPage.jsx
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast"; 
-
+import api from "../api";
 export default function HistoryPage() {
   const navigate = useNavigate();
   const [history, setHistory] = useState([]);
@@ -33,7 +32,7 @@ export default function HistoryPage() {
 
     const fetchHistory = async () => {
       try {
-        const res = await axios.get("/api/user/history", {
+        const res = await api.get("/api/user/history", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setHistory(res.data.history || []);
@@ -64,7 +63,7 @@ export default function HistoryPage() {
                 try {
                   const token = localStorage.getItem("token");
 
-                  await axios.delete(`/api/user/history/${id}`, {
+                  await api.delete(`/api/user/history/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                   });
 
@@ -111,7 +110,7 @@ export default function HistoryPage() {
                 try {
                   const token = localStorage.getItem("token");
 
-                  await axios.delete(`/api/user/history`, {
+                  await api.delete(`/api/user/history`, {
                     headers: { Authorization: `Bearer ${token}` },
                   });
 

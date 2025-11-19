@@ -1,10 +1,9 @@
 //categoryform.jsx
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SuccessToast from "./SuccessToast";
 import ErrorToast from "./ErrorToast";
-
+import api from "../api";
 export default function CategoryForm() {
   const navigate = useNavigate();
 
@@ -51,7 +50,7 @@ export default function CategoryForm() {
     const config = { category, level, count: Number(count), language };
 
     try {
-      const res = await axios.post("/api/chat/start", config);
+      const res = await api.post("/api/chat/start", config);
 
       const practice = {
         ...config,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import {
   BarChart,
   Bar,
@@ -43,13 +43,13 @@ export default function UserDashboard() {
     if (!token) return navigate("/login");
 
     try {
-      const profileRes = await axios.get("/api/auth/me", {
+      const profileRes = await api.get("/api/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       setProfile(profileRes.data.user);
 
-      const historyRes = await axios.get("/api/user/history", {
+      const historyRes = await api.get("/api/user/history", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -84,7 +84,7 @@ export default function UserDashboard() {
       setDeletingId(deleteId);
       const token = localStorage.getItem("token");
 
-      await axios.delete(`/api/user/history/${deleteId}`, {
+      await api.delete(`/api/user/history/${deleteId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

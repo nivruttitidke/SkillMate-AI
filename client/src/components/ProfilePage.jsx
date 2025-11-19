@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-
+import api from "../api";
 export default function ProfilePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -18,7 +17,7 @@ export default function ProfilePage() {
 
     const loadUser = async () => {
       try {
-        const res = await axios.get("/api/auth/me", {
+        const res = await api.get("/api/auth/me", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data.user);
@@ -44,7 +43,7 @@ export default function ProfilePage() {
     setDeleting(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("/api/auth/delete", {
+      await api.delete("/api/auth/delete", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
